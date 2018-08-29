@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +32,26 @@ public class BoyController {
 	}
 	
 	@RequestMapping("save")
-	public Boy save(@RequestParam("name") String name,
+	public Boy save(
+			@RequestParam("name") String name,
 			       @RequestParam("height") Integer height){
 		Boy boy = new Boy();
 		boy.setName(name);
 		boy.setHeight(height);
 		return repository.save(boy);
 	}
+	
+	@RequestMapping("/save2")
+	public Boy save2( @Valid  Boy boy, BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			System.out.println(bindingResult.getFieldError().getDefaultMessage());
+			return null;
+		}
+		boy.setId(null);
+		return repository.save(boy);
+	}
+	
+	
 
 	@RequestMapping("/get/{id}")
 	public Optional<Boy> getOne(@PathVariable("id") Integer id){
@@ -49,7 +65,7 @@ public class BoyController {
 	}
 	
 	@RequestMapping("/update/{id}")
-	public Boy updateOne(@RequestParam("id") Integer id,
+	public Boy updateOne(@PathVariable("id") Integer id,
 			@RequestParam("name") String name,
 		       @RequestParam("height") Integer height){
 		Boy boy = new Boy();

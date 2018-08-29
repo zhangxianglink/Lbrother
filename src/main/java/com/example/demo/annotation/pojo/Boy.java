@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Boy {
@@ -12,8 +13,8 @@ public class Boy {
 	private Integer id;
 	
 	private String name;
-	
-	
+	//使用@Valid对参数进行校验
+	@Min(value = 180, message = "未满180不得入内")
 	private Integer height;
 
 	public Boy() {
@@ -41,6 +42,11 @@ public class Boy {
 
 	public void setHeight(Integer height) {
 		this.height = height;
+	}
+
+	@Override
+	public String toString() {
+		return "Boy [id=" + id + ", name=" + name + ", height=" + height + "]";
 	}
 	
 	
