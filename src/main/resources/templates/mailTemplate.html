@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>邮件模板</title>
+</head>
+<body>
+   你好，感谢关注我们，请点击下面链接完成验证！
+  <a href="#" th:href="@{http://www.baidu.com/{id}(id=${id})}">send</a>
+</body>
+</html>
