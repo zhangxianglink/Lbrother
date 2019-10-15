@@ -28,7 +28,7 @@ public class SendMailController {
 	public String sendTxtmail(String to,String subject,String context){
 		try {
 			SimpleMailMessage mail = new SimpleMailMessage();
-			mail.setSubject(subject);
+			mail.setSubject("xxxxxxxxxxx");
 			mail.setFrom(from);
 			mail.setTo(to);
 			mail.setText(context);
